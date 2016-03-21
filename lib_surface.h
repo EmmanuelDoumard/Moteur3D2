@@ -1,0 +1,77 @@
+#ifndef _LIB_SURFACE_H_
+#define _LIB_SURFACE_H_
+
+#include <stdlib.h>
+#include <SDL/SDL.h>
+
+// definition de la taille de fenetre
+#define RX 800
+#define RY 600
+
+#define MIN(a,b) ((a)<(b)?(a):(b))
+#define MAX(a,b) ((a)>(b)?(a):(b))
+
+// definition de quelques constantes de couleurs a utiliser lors de la construction des triangles en 3D
+// les couleurs sont definies en Uint32
+#define BLANC  0x00ffffff
+#define GRISC  0x00aaaaaa
+#define GRISF  0x00555555
+#define NOIR   0x00000000
+
+#define ROUGEC 0x00ff0000
+#define ROUGEF 0x00880000
+#define VERTC  0x0000ff00
+#define VERTF  0x00008800
+#define BLEUC  0x000000ff
+#define BLEUF  0x00000088
+
+#define JAUNEC 0x00ffff00
+#define JAUNEF 0x00888800
+#define PALEC  0x0000ffff
+#define PALEF  0x00008888
+#define ROSEC  0x00ff00ff
+#define ROSEF  0x00880088
+
+#define MARRON1 0x00AD4F09
+#define MARRON2 0x00A76726
+#define MARRON3 0x0088421D
+#define MARRON4 0x00AE642D
+
+/* pour affichage avec %s dans printf, exemple :
+ * printf("couleur = %s\n", COULEUR(valeur_numerique));
+ */
+#define COULEUR(c) ((c==BLANC)?"BLANC":(\
+(c==GRISC)?"GRISC":(\
+(c==GRISF)?"GRISF":(\
+(c==NOIR)?"NOIR":(\
+(c==ROUGEC)?"ROUGEC":(\
+(c==ROUGEF)?"ROUGEF":(\
+(c==VERTC)?"VERTC":(\
+(c==VERTF)?"VERTF":(\
+(c==BLEUC)?"BLEUC":(\
+(c==BLEUF)?"BLEUF":(\
+(c==JAUNEC)?"JAUNEC":(\
+(c==JAUNEF)?"JAUNEF":(\
+(c==PALEC)?"PALEC":(\
+(c==PALEF)?"PALEF":(\
+(c==ROSEC?"ROSEC":(\
+(c==ROSEF)?"ROSEF":(\
+"AUTRE"))))))))))))))))))
+
+
+typedef struct {
+    SDL_Surface *ecran;
+    int x, y;
+	int *xmin; // eviter un malloc dans remplirTriangle2d
+	int *xmax;
+} t_surface;
+
+t_surface *creerFenetre(int x, int y);
+void effacerFenetre(t_surface * surface, Uint32 couleur);
+// donne une couleur a un pixel de la surface (a la position x,y)
+void definirPixel(t_surface *surface, int x, int y, Uint32 pixel);
+SDL_Surface *obtenirEcran(t_surface *surface);
+void majEcran(t_surface *surface);
+Uint32 echelle_de_couleur(int z);
+
+#endif
