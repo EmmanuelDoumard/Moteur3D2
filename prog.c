@@ -79,7 +79,8 @@ int main(int argc,char** argv)
         translationObjet3d(o10, vecteur);
 	rotationObjet3d(o10,origine,1,1,1);
 	__trier_objet(o10);
-        //dessinerObjet3d(surface, o10);
+	
+        dessinerObjet3d(surface, o10);
 	printf("coucou\n");
         free(vecteur);
 	SDL_Delay(25);

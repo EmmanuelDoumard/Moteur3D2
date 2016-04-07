@@ -215,17 +215,17 @@ void __trier_objet(t_objet3d *pt_objet)
   Uint32 tmp_c;
   int nb_faces=0;
   int i,j;
-  printf("coucou\n");
-  while (suiv->pt_suiv != NULL) {
-    printf("coucou");
+  printf("coucou1\n");
+  while (suiv != NULL) {
     suiv = suiv->pt_suiv;
     nb_faces++;
-    printf("coucou");
+    printf("%d\n",nb_faces);
   }
 
+  printf("coucou3\n");
   for (i=0;i<nb_faces;i++){
     suiv=pt_objet->tete;
-    for (j=0;i<nb_faces-i;j++){
+    for (j=0;j<nb_faces-i-1;j++){
       if (avgz(suiv->face)<avgz(suiv->pt_suiv->face)){
 	tmp_t=suiv->face;
 	tmp_c=suiv->couleur;
@@ -238,7 +238,6 @@ void __trier_objet(t_objet3d *pt_objet)
       }
     }
   }
-
 }
 
 double avgz(t_triangle3d *face){
