@@ -7,8 +7,8 @@
 #include "lib_objet3d.h"
 
 //#define T2D
-#define T3D
-//#define O3D
+//#define T3D
+#define O3D
 
 int main(int argc,char** argv)
 {
@@ -28,7 +28,7 @@ int main(int argc,char** argv)
 #endif
 #ifdef O3D
     t_point3d *origine = definirPoint3d(0,0,0), *vecteur;
-    t_objet3d *o10 = sphere_amiga(80, 8, 16);
+    t_objet3d *o10 = parallelepipede(100, 250, 500);
     rotationObjet3d(o10, origine, 90, 0,0);
 #endif
 
@@ -38,7 +38,7 @@ int main(int argc,char** argv)
     timestart = SDL_GetTicks();
 
 
-    while(i<75)
+    while(i<75*10)
     {
         effacerFenetre(surface, 0);
 
@@ -75,9 +75,14 @@ int main(int argc,char** argv)
  * - finir par le tri des faces d'un objet et la composition des objets
  */
         vecteur = definirPoint3d(sin(i*M_PI/180),cos(i*M_PI/180),0);
+	printf("coucou\n");
         translationObjet3d(o10, vecteur);
-        dessinerObjet3d(surface, o10);
+	rotationObjet3d(o10,origine,1,1,1);
+	__trier_objet(o10);
+        //dessinerObjet3d(surface, o10);
+	printf("coucou\n");
         free(vecteur);
+	SDL_Delay(25);
 #endif
 
         majEcran(surface);

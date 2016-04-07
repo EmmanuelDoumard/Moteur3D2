@@ -26,6 +26,11 @@ struct __objet3d
     t_maillon *tete;
 };
 
+// créé un nouveau maillon
+t_maillon* __cree_maillon(t_triangle3d *face, Uint32 couleur);
+// insère en tete le maillon
+void __insere_tete(t_objet3d *pt_objet, t_maillon *pt_maillon);
+
 // retourne un object alloue mais avec une liste vide de faces
 t_objet3d* objet_vide();
 // retourne un object de type camera alloue (liste vide de faces evidement)
@@ -42,6 +47,10 @@ t_objet3d* arbre(double lx, double ly, double lz);
 // retourne un object alloue mais avec une liste de faces centrees sur (0,0,0) de taille lx,0,lz decoupe avec nx et nz carres alternativement noirs et blancs
 t_objet3d* damier(double lx, double lz, double nx, double nz);
 
+// algorithme du peintre
+void __trier_objet(t_objet3d *pt_objet);
+// retourne la moyenne de la profondeur de la face
+double avgz(t_triangle3d *face);
 // affiche toutes les faces de l'objet sur la surface
 void dessinerObjet3d(t_surface *surface, t_objet3d* pt_objet);
 
