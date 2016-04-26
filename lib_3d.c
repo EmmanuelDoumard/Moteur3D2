@@ -52,6 +52,7 @@ t_triangle3d *definirTriangle3d(t_point3d * a, t_point3d * b, t_point3d * c)	// 
     t->abc[1]=b;
     t->abc[2]=c;
   }
+  printf("a(%f,%f,%f)\nb(%f,%f,%f)\nc(%f,%f,%f)\n",a->xyzt[0],a->xyzt[1],a->xyzt[2],b->xyzt[0],b->xyzt[1],b->xyzt[2],c->xyzt[0],c->xyzt[1],c->xyzt[2]); // debug
 
   return t;
 }
@@ -130,15 +131,15 @@ void rotationTriangle3d(t_triangle3d *t, t_point3d *centre, float degreX, float 
   double thetaZ=degreZ*M_PI/180;
   double thetaY=degreY*M_PI/180;
   double thetaX=degreX*M_PI/180;
-  double matrice_rotationz[4][4]={{cos(thetaZ), -sin(thetaZ), 0, 0}, \
+  double matrice_rotationz[4][4]={{cos(thetaZ),-sin(thetaZ), 0, 0}, \
 				  {sin(thetaZ), cos(thetaZ), 0, 0}, \
-				   {0, 0, 1, 0},\
-				   {0, 0, 0, 1}};
+				  {0          , 0          , 1, 0},			    \
+				  {0          , 0          , 0, 1}};
 
-  double matrice_rotationy[4][4]={{cos(thetaY), 0, sin(thetaY), 0},	\
-				  {0, 1, 0, 0},	\
+  double matrice_rotationy[4][4]={{cos(thetaY) , 0, sin(thetaY), 0},	\
+				  {0           , 1, 0          , 0},	\
 				  {-sin(thetaY), 0, cos(thetaY), 0},	\
-				  {0, 0, 0, 1}};
+				  {0           , 0, 0          , 1}};
 
   double matrice_rotationx[4][4]={{1, 0, 0, 0}, \
 				  {0,cos(thetaX), -sin(thetaX), 0}, \

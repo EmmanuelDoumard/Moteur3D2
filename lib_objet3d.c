@@ -43,7 +43,7 @@ t_objet3d *camera()
   return camera;
 }
 
-t_objet3d* parallelepipede(double lx, double ly, double lz)
+t_objet3d* parallelepipede(double lx, double ly, double lz, Uint32 couleur)
 {
   t_objet3d *pt_objet = NULL;
 
@@ -54,87 +54,86 @@ t_objet3d* parallelepipede(double lx, double ly, double lz)
   double z = lz/2;
 
 
-  t_point3d *p1_1 = definirPoint3d(-x,-y,z);
-  t_point3d *p1_2 = definirPoint3d(x,y,z);
-  t_point3d *p1_3 = definirPoint3d(x,-y,z);
+  t_point3d *p1_1 = definirPoint3d(x,-y,-z);
+  t_point3d *p1_2 = definirPoint3d(x,y,-z);
+  t_point3d *p1_3 = definirPoint3d(-x,-y,-z);
   t_triangle3d *t1 = definirTriangle3d(p1_1,p1_2,p1_3);
-  __insere_tete(pt_objet,__cree_maillon(t1,GRISC));
+  __insere_tete(pt_objet,__cree_maillon(t1,couleur));
   
-  t_point3d *p2_1 = definirPoint3d(-x,-y,z);
-  t_point3d *p2_2 = definirPoint3d(x,-y,z);
-  t_point3d *p2_3 = definirPoint3d(x,y,z);
+  t_point3d *p2_1 = definirPoint3d(-x,y,-z);
+  t_point3d *p2_2 = definirPoint3d(-x,-y,-z);
+  t_point3d *p2_3 = definirPoint3d(x,y,-z);
   t_triangle3d *t2 = definirTriangle3d(p2_1,p2_2,p2_3);
-  __insere_tete(pt_objet,__cree_maillon(t2,GRISF));
+  __insere_tete(pt_objet,__cree_maillon(t2,couleur+2));
 
  
-  t_point3d *p3_1 = definirPoint3d(x,-y,z);
-  t_point3d *p3_2 = definirPoint3d(x,y,z);
-  t_point3d *p3_3 = definirPoint3d(x,y,-z);
+  t_point3d *p3_1 = definirPoint3d(x,-y,-z);
+  t_point3d *p3_2 = definirPoint3d(x,-y,z);
+  t_point3d *p3_3 = definirPoint3d(x,y,z);
   t_triangle3d *t3 = definirTriangle3d(p3_1,p3_2,p3_3);
-  __insere_tete(pt_objet,__cree_maillon(t3,ROUGEC));
+  __insere_tete(pt_objet,__cree_maillon(t3,couleur+4));
 
   
-  t_point3d *p4_1 = definirPoint3d(x,-y,z);
+  t_point3d *p4_1 = definirPoint3d(x,y,z);
   t_point3d *p4_2 = definirPoint3d(x,-y,-z);
   t_point3d *p4_3 = definirPoint3d(x,y,-z);
   t_triangle3d *t4 = definirTriangle3d(p4_1,p4_2,p4_3);
-  __insere_tete(pt_objet,__cree_maillon(t4,ROUGEF));
+  __insere_tete(pt_objet,__cree_maillon(t4,couleur+6));
 
  
-  t_point3d *p5_1 = definirPoint3d(-x,y,-z);
-  t_point3d *p5_2 = definirPoint3d(-x,-y,-z);
-  t_point3d *p5_3 = definirPoint3d(x,y,-z);
+  t_point3d *p5_1 = definirPoint3d(-x,-y,z);
+  t_point3d *p5_2 = definirPoint3d(x,y,z);
+  t_point3d *p5_3 = definirPoint3d(x,-y,z);
   t_triangle3d *t5 = definirTriangle3d(p5_1,p5_2,p5_3);
-  __insere_tete(pt_objet,__cree_maillon(t5,VERTC));
+  __insere_tete(pt_objet,__cree_maillon(t5,couleur+8));
 
 
-  t_point3d *p6_1 = definirPoint3d(-x,-y,-z);
-  t_point3d *p6_2 = definirPoint3d(x,-y,-z);
-  t_point3d *p6_3 = definirPoint3d(x,y,-z);
+  t_point3d *p6_1 = definirPoint3d(-x,-y,z);
+  t_point3d *p6_2 = definirPoint3d(-x,y,z);
+  t_point3d *p6_3 = definirPoint3d(x,y,z);
   t_triangle3d *t6 = definirTriangle3d(p6_1,p6_2,p6_3);
-  __insere_tete(pt_objet,__cree_maillon(t6,VERTF));
+  __insere_tete(pt_objet,__cree_maillon(t6,couleur+10));
 
 
-  t_point3d *p7_1 = definirPoint3d(-x,-y,z);
-  t_point3d *p7_2 = definirPoint3d(-x,y,z);
-  t_point3d *p7_3 = definirPoint3d(-x,y,-z);
+  t_point3d *p7_1 = definirPoint3d(-x,-y,-z);
+  t_point3d *p7_2 = definirPoint3d(-x,-y,z);
+  t_point3d *p7_3 = definirPoint3d(-x,y,z);
   t_triangle3d *t7 = definirTriangle3d(p7_1,p7_2,p7_3);
-  __insere_tete(pt_objet,__cree_maillon(t7,BLEUC));
+  __insere_tete(pt_objet,__cree_maillon(t7,couleur+12));
 
 
   t_point3d *p8_1 = definirPoint3d(-x,y,-z);
-  t_point3d *p8_2 = definirPoint3d(-x,-y,z);
-  t_point3d *p8_3 = definirPoint3d(-x,-y,-z);
+  t_point3d *p8_2 = definirPoint3d(-x,-y,-z);
+  t_point3d *p8_3 = definirPoint3d(-x,y,z);
   t_triangle3d *t8 = definirTriangle3d(p8_1,p8_2,p8_3);
-  __insere_tete(pt_objet,__cree_maillon(t8,BLEUF));
+  __insere_tete(pt_objet,__cree_maillon(t8,couleur+14));
 
 
-  t_point3d *p9_1 = definirPoint3d(-x,y,z);
-  t_point3d *p9_2 = definirPoint3d(-x,y,-z);
-  t_point3d *p9_3 = definirPoint3d(x,y,-z);
+  t_point3d *p9_1 = definirPoint3d(-x,y,-z);
+  t_point3d *p9_2 = definirPoint3d(x,y,-z);
+  t_point3d *p9_3 = definirPoint3d(x,y,z);
   t_triangle3d *t9 = definirTriangle3d(p9_1,p9_2,p9_3);
-  __insere_tete(pt_objet,__cree_maillon(t9,JAUNEC));
+  __insere_tete(pt_objet,__cree_maillon(t9,couleur+16));
   
 
-  t_point3d *p10_1 = definirPoint3d(-x,y,z);
-  t_point3d *p10_2 = definirPoint3d(x,y,z);
-  t_point3d *p10_3 = definirPoint3d(x,y,-z);
+  t_point3d *p10_1 = definirPoint3d(-x,y,-z);
+  t_point3d *p10_2 = definirPoint3d(-x,y,z);
+  t_point3d *p10_3 = definirPoint3d(x,y,z);
   t_triangle3d *t10 = definirTriangle3d(p10_1,p10_2,p10_3);
-  __insere_tete(pt_objet,__cree_maillon(t10,JAUNEF));
+  __insere_tete(pt_objet,__cree_maillon(t10,couleur+18));
 
  
-  t_point3d *p11_1 = definirPoint3d(-x,-y,z);
-  t_point3d *p11_2 = definirPoint3d(x,-y,-z);
-  t_point3d *p11_3 = definirPoint3d(-x,-y,-z);
+  t_point3d *p11_1 = definirPoint3d(-x,-y,-z);
+  t_point3d *p11_2 = definirPoint3d(x,-y,z);
+  t_point3d *p11_3 = definirPoint3d(x,-y,-z);
   t_triangle3d *t11 = definirTriangle3d(p11_1,p11_2,p11_3);
-  __insere_tete(pt_objet,__cree_maillon(t11,MARRON1));
+  __insere_tete(pt_objet,__cree_maillon(t11,couleur+20));
 
-  t_point3d *p12_1 = definirPoint3d(-x,-y,z);
-  t_point3d *p12_2 = definirPoint3d(x,-y,z);
-  t_point3d *p12_3 = definirPoint3d(x,-y,-z);
+  t_point3d *p12_1 = definirPoint3d(-x,-y,-z);
+  t_point3d *p12_2 = definirPoint3d(-x,-y,z);
+  t_point3d *p12_3 = definirPoint3d(x,-y,z);
   t_triangle3d *t12 = definirTriangle3d(p12_1,p12_2,p12_3);
-  __insere_tete(pt_objet,__cree_maillon(t12,MARRON2));
-
+  __insere_tete(pt_objet,__cree_maillon(t12,couleur+22));
 
   return pt_objet;
 }
@@ -145,7 +144,52 @@ t_objet3d* sphere(double r, double nlat, double nlong)
 
   pt_objet = objet_vide();
 
-  // TODO
+  int i,j;
+  double h1,h2;
+
+  t_point3d *p1 = malloc(sizeof(t_point3d));
+  t_point3d *p2 = malloc(sizeof(t_point3d));
+  t_point3d *p3 = malloc(sizeof(t_point3d));
+  t_triangle3d *t1 = malloc(sizeof(t_triangle3d));
+
+  h1=r*(1-2/nlat);
+  for(i=0;i<nlong;i++){
+
+    p1=definirPoint3d(0,r,0);
+    p2=definirPoint3d(r*cos(i*2*M_PI/nlong)*sqrt(1-(h1*h1)/(r*r)),h1,r*sin(i*2*M_PI/nlong)*sqrt(1-(h1*h1)/(r*r)));
+    p3=definirPoint3d(r*cos((i+1)*2*M_PI/nlong)*sqrt(1-(h1*h1)/(r*r)),h1,r*sin((i+1)*2*M_PI/nlong)*sqrt(1-(h1*h1)/(r*r)));
+
+    t1 = definirTriangle3d(p1,p2,p3);
+    __insere_tete(pt_objet,__cree_maillon(t1,echelle_de_couleur(100*i)));
+  }
+
+  for(i=1;i<nlat-1;i++){
+    h1=r*(1-2*i/nlat);
+    h2=r*(1-2*(i+1)/nlat);
+    for(j=0;j<nlong;j++){
+      p1=definirPoint3d(r*cos(j*2*M_PI/nlong)*sqrt(1-(h1*h1)/(r*r)),h1,r*sin(j*2*M_PI/nlong)*sqrt(1-(h1*h1)/(r*r)));
+      p2=definirPoint3d(r*cos(j*2*M_PI/nlong)*sqrt(1-(h2*h2)/(r*r)),h2,r*sin(j*2*M_PI/nlong)*sqrt(1-(h2*h2)/(r*r)));
+      p3=definirPoint3d(r*cos((j+1)*2*M_PI/nlong)*sqrt(1-(h2*h2)/(r*r)),h2,r*sin((j+1)*2*M_PI/nlong)*sqrt(1-(h2*h2)/(r*r)));
+      t1 = definirTriangle3d(p1,p2,p3);
+      __insere_tete(pt_objet,__cree_maillon(t1,echelle_de_couleur(10*j*i)));
+
+      p1=definirPoint3d(r*cos(j*2*M_PI/nlong)*sqrt(1-(h1*h1)/(r*r)),h1,r*sin(j*2*M_PI/nlong)*sqrt(1-(h1*h1)/(r*r)));
+      p2=definirPoint3d(r*cos((j+1)*2*M_PI/nlong)*sqrt(1-(h1*h1)/(r*r)),h1,r*sin((j+1)*2*M_PI/nlong)*sqrt(1-(h1*h1)/(r*r)));
+      p3=definirPoint3d(r*cos((j+1)*2*M_PI/nlong)*sqrt(1-(h2*h2)/(r*r)),h2,r*sin((j+1)*2*M_PI/nlong)*sqrt(1-(h2*h2)/(r*r)));
+      t1 = definirTriangle3d(p1,p2,p3);
+      __insere_tete(pt_objet,__cree_maillon(t1,echelle_de_couleur(10*i*j)));
+    }
+  } 
+
+  h1=r*(1-2/nlat);
+  for(i=0;i<nlong;i++){
+
+    p1=definirPoint3d(0,-r,0);
+    p2=definirPoint3d(r*cos(i*2*M_PI/nlong)*sqrt(1-(h1*h1)/(r*r)),-h1,r*sin(i*2*M_PI/nlong)*sqrt(1-(h1*h1)/(r*r)));
+    p3=definirPoint3d(r*cos((i+1)*2*M_PI/nlong)*sqrt(1-(h1*h1)/(r*r)),-h1,r*sin((i+1)*2*M_PI/nlong)*sqrt(1-(h1*h1)/(r*r)));
+    t1 = definirTriangle3d(p1,p2,p3);
+    __insere_tete(pt_objet,__cree_maillon(t1,echelle_de_couleur(100*i)));
+  }
 
   return pt_objet;
 }
@@ -156,20 +200,152 @@ t_objet3d* sphere_amiga(double r, double nlat, double nlong)
 
   pt_objet = objet_vide();
 
-  // TODO
 
+  int i,j;
+  double h1,h2;
+
+  t_point3d *p1 = malloc(sizeof(t_point3d));
+  t_point3d *p2 = malloc(sizeof(t_point3d));
+  t_point3d *p3 = malloc(sizeof(t_point3d));
+  t_triangle3d *t1 = malloc(sizeof(t_triangle3d));
+
+  h1=r*(1-2/nlat);
+  for(i=0;i<nlong;i++){
+
+    p1=definirPoint3d(0,r,0);
+    p2=definirPoint3d(r*cos(i*2*M_PI/nlong)*sqrt(1-(h1*h1)/(r*r)),h1,r*sin(i*2*M_PI/nlong)*sqrt(1-(h1*h1)/(r*r)));
+    p3=definirPoint3d(r*cos((i+1)*2*M_PI/nlong)*sqrt(1-(h1*h1)/(r*r)),h1,r*sin((i+1)*2*M_PI/nlong)*sqrt(1-(h1*h1)/(r*r)));
+
+    t1 = definirTriangle3d(p1,p2,p3);
+
+    if((i+j)%2==0){
+      __insere_tete(pt_objet,__cree_maillon(t1,BLANC));
+    }
+    else{
+      __insere_tete(pt_objet,__cree_maillon(t1,ROUGEF));
+    }
+
+  }
+
+  for(i=1;i<nlat-1;i++){
+    h1=r*(1-2*i/nlat);
+    h2=r*(1-2*(i+1)/nlat);
+    for(j=0;j<nlong;j++){
+      p1=definirPoint3d(r*cos(j*2*M_PI/nlong)*sqrt(1-(h1*h1)/(r*r)),h1,r*sin(j*2*M_PI/nlong)*sqrt(1-(h1*h1)/(r*r)));
+      p2=definirPoint3d(r*cos(j*2*M_PI/nlong)*sqrt(1-(h2*h2)/(r*r)),h2,r*sin(j*2*M_PI/nlong)*sqrt(1-(h2*h2)/(r*r)));
+      p3=definirPoint3d(r*cos((j+1)*2*M_PI/nlong)*sqrt(1-(h2*h2)/(r*r)),h2,r*sin((j+1)*2*M_PI/nlong)*sqrt(1-(h2*h2)/(r*r)));
+      t1 = definirTriangle3d(p1,p2,p3);
+
+      if((i+j)%2==0){
+	__insere_tete(pt_objet,__cree_maillon(t1,BLANC));
+      }
+      else{
+	__insere_tete(pt_objet,__cree_maillon(t1,ROUGEF));
+      }
+
+      p1=definirPoint3d(r*cos(j*2*M_PI/nlong)*sqrt(1-(h1*h1)/(r*r)),h1,r*sin(j*2*M_PI/nlong)*sqrt(1-(h1*h1)/(r*r)));
+      p2=definirPoint3d(r*cos((j+1)*2*M_PI/nlong)*sqrt(1-(h1*h1)/(r*r)),h1,r*sin((j+1)*2*M_PI/nlong)*sqrt(1-(h1*h1)/(r*r)));
+      p3=definirPoint3d(r*cos((j+1)*2*M_PI/nlong)*sqrt(1-(h2*h2)/(r*r)),h2,r*sin((j+1)*2*M_PI/nlong)*sqrt(1-(h2*h2)/(r*r)));
+      t1 = definirTriangle3d(p1,p2,p3);
+
+      if((i+j)%2==0){
+	__insere_tete(pt_objet,__cree_maillon(t1,BLANC));
+      }
+      else{
+	__insere_tete(pt_objet,__cree_maillon(t1,ROUGEF));
+      }
+
+    }
+  } 
+
+  h1=r*(1-2/nlat);
+  for(i=0;i<nlong;i++){
+
+    p1=definirPoint3d(0,-r,0);
+    p2=definirPoint3d(r*cos(i*2*M_PI/nlong)*sqrt(1-(h1*h1)/(r*r)),-h1,r*sin(i*2*M_PI/nlong)*sqrt(1-(h1*h1)/(r*r)));
+    p3=definirPoint3d(r*cos((i+1)*2*M_PI/nlong)*sqrt(1-(h1*h1)/(r*r)),-h1,r*sin((i+1)*2*M_PI/nlong)*sqrt(1-(h1*h1)/(r*r)));
+    t1 = definirTriangle3d(p1,p2,p3);
+
+    if((i+j)%2==0){
+      __insere_tete(pt_objet,__cree_maillon(t1,BLANC));
+    }
+    else{
+      __insere_tete(pt_objet,__cree_maillon(t1,ROUGEF));
+    }
+  }
 
   return pt_objet;
 }
 
-t_objet3d* arbre(double lx, double ly, double lz)
+
+t_objet3d* pyramide(double lx, double ly, double lz, Uint32 couleur) //pyramide avec comme base un rectangle de taille (lx,lz) et de hauteur ly centré sur (0,0,0);
 {
   t_objet3d *pt_objet = NULL;
 
   pt_objet = objet_vide();
-  // TODO
+
+  double x = lx/2;
+  double y = ly/2;
+  double z = lz/2;
+
+
+  t_point3d *p1= definirPoint3d(-x,y,-z);
+  t_point3d *p2 = definirPoint3d(x,y,-z);
+  t_point3d *p3 = definirPoint3d(x,y,z);
+  t_triangle3d *t = definirTriangle3d(p1,p2,p3);
+  __insere_tete(pt_objet,__cree_maillon(t,couleur));
+  
+
+  p1 = definirPoint3d(-x,y,-z);
+  p2 = definirPoint3d(-x,y,z);
+  p3 = definirPoint3d(x,y,z);
+  t = definirTriangle3d(p1,p2,p3);
+  __insere_tete(pt_objet,__cree_maillon(t,couleur+20));
+
+
+  p1 = definirPoint3d(-x,y,-z);
+  p2 = definirPoint3d(-x,y,z);
+  p3 = definirPoint3d(0,-y,0);
+  t = definirTriangle3d(p1,p2,p3);
+  __insere_tete(pt_objet,__cree_maillon(t,couleur+40));
+ 
+  p1 = definirPoint3d(-x,y,-z);
+  p2 = definirPoint3d(x,y,-z);
+  p3 = definirPoint3d(0,-y,0);
+  t = definirTriangle3d(p1,p2,p3);
+  __insere_tete(pt_objet,__cree_maillon(t,couleur+60));
+  
+  p1 = definirPoint3d(-x,y,z);
+  p2 = definirPoint3d(x,y,z);
+  p3 = definirPoint3d(0,-y,0);
+  t = definirTriangle3d(p1,p2,p3);
+  __insere_tete(pt_objet,__cree_maillon(t,couleur+80));
+ 
+   
+  p1 = definirPoint3d(x,y,-z);
+  p2 = definirPoint3d(x,y,z);
+  p3 = definirPoint3d(0,-y,0);
+  t = definirTriangle3d(p1,p2,p3);
+  __insere_tete(pt_objet,__cree_maillon(t,couleur+100));
+ 
 
   return pt_objet;
+
+}
+
+t_objet3d* arbre(double lx, double ly, double lz)
+{
+
+  t_objet3d *tronc=parallelepipede(lx,ly/2,lz,MARRON1);
+  translationObjet3d(tronc,definirPoint3d(0,ly/4,0));
+  
+  t_objet3d *feuillage=pyramide(lx,ly/2,lz,VERTC);
+  rotationObjet3d(feuillage,definirPoint3d(0,0,0),180,0,0);
+  translationObjet3d(feuillage,definirPoint3d(0,-ly/4,0));
+
+  composerObjet3d(tronc,feuillage);
+
+  return tronc;
 
 }
 
@@ -178,8 +354,39 @@ t_objet3d* damier(double lx, double lz, double nx, double nz)
   t_objet3d *pt_objet = NULL;
 
   pt_objet = objet_vide();
+  
+  int i,j;
 
-  // TODO
+  t_point3d *p1 = malloc(sizeof(t_point3d));
+  t_point3d *p2 = malloc(sizeof(t_point3d));
+  t_point3d *p3 = malloc(sizeof(t_point3d));
+
+  for (i=-nx/2;i<nx/2+((int)nx/2)%2-1;i++) {
+    for (j=-nz/2;j<nz/2+((int)nz/2)%2-1;j++) {
+      p1=definirPoint3d(j*lx/nx,0,i*lz/nz);
+      p2=definirPoint3d((j+1)*lx/nx,0,i*lz/nz);
+      p3=definirPoint3d((j+1)*lx/nx,0,(i+1)*lz/nz);
+
+      if ((i+j)%2==0) {
+      __insere_tete(pt_objet,__cree_maillon(definirTriangle3d(p1,p2,p3),BLANC));
+      }
+      else {
+	__insere_tete(pt_objet,__cree_maillon(definirTriangle3d(p1,p2,p3),NOIR));
+      }
+
+      p1=definirPoint3d(j*lx/nx,0,i*lz/nz);
+      p2=definirPoint3d(j*lx/nx,0,(i+1)*lz/nz);
+      p3=definirPoint3d((j+1)*lx/nx,0,(i+1)*lz/nz);
+
+      if ((i+j)%2==0) {
+      __insere_tete(pt_objet,__cree_maillon(definirTriangle3d(p1,p2,p3),BLANC));
+      }
+      else {
+	__insere_tete(pt_objet,__cree_maillon(definirTriangle3d(p1,p2,p3),NOIR));
+      }
+    }
+  }
+
 
   return pt_objet;
 
@@ -196,9 +403,11 @@ t_objet3d *copierObjet3d(t_objet3d *o) // attention, effectue une copie mirroir
 
 void composerObjet3d(t_objet3d* o, t_objet3d* o2) /* o = o+o2, o2 ne signifiera plus rien */
 {
-
-  // TODO
-
+  t_maillon *suiv = o->tete;
+  while(suiv->pt_suiv != NULL){
+    suiv=suiv->pt_suiv;
+  }
+  suiv->pt_suiv=o2->tete;
 }
 
 void libererObjet3d(t_objet3d *o)
@@ -215,29 +424,36 @@ void __trier_objet(t_objet3d *pt_objet)
   Uint32 tmp_c;
   int nb_faces=0;
   int i,j;
-  printf("coucou1\n");
   while (suiv != NULL) {
     suiv = suiv->pt_suiv;
     nb_faces++;
-    printf("%d\n",nb_faces);
   }
 
-  printf("coucou3\n");
+  printf("nb_faces=%d\n",nb_faces);
+
   for (i=0;i<nb_faces;i++){
     suiv=pt_objet->tete;
     for (j=0;j<nb_faces-i-1;j++){
+      //printf("avgz(suiv->face)=%f ; avgz(suiv->pt_suiv->face)=%f\n",avgz(suiv->face),avgz(suiv->pt_suiv->face));
       if (avgz(suiv->face)<avgz(suiv->pt_suiv->face)){
+	//printf("Reagencement...\n");
 	tmp_t=suiv->face;
 	tmp_c=suiv->couleur;
 	suiv->face=suiv->pt_suiv->face;
 	suiv->couleur=suiv->pt_suiv->couleur;
 	suiv->pt_suiv->face=tmp_t;
 	suiv->pt_suiv->couleur=tmp_c;
-	
-	suiv=suiv->pt_suiv;	
+		
       }
+
+      suiv=suiv->pt_suiv;
     }
   }
+  suiv=pt_objet->tete;
+  /*  for(i=0;i<nb_faces;i++){
+    printf("%f,%d\n",avgz(suiv->face),suiv->couleur);
+    suiv=suiv->pt_suiv; 
+    } */
 }
 
 double avgz(t_triangle3d *face){
