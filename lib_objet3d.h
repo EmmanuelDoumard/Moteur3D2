@@ -42,6 +42,8 @@ t_objet3d* parallelepipede(double lx, double ly, double lz, Uint32 couleur);
 t_objet3d* sphere(double r, double nlat, double nlong);
 // retourne un object alloue mais avec une liste de faces centrees sur (0,0,0) de rayon r avec nlat latitudes et nlong longitudes, prend des couleurs rouges et blanches sur des carres adjacents, cf google
 t_objet3d* sphere_amiga(double r, double nlat, double nlong);
+// retourne un tore
+t_objet3d* tore(double r1, double r2, double nlat, double nlong);
 // retourne une pyramide centrée en (0,0,0) de dimension lx,ly,lz et d'une certaine gamme de couleur
 t_objet3d* pyramide(double lx, double ly, double lz, Uint32 couleur);
 // retourne un object alloue mais avec une liste de faces centrees sur (0,0,0) : c'est un rectangle marron (plusieurs marrons possibles) et une pyramide au verte (plusieurs verts possibles) au sommet

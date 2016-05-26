@@ -8,4 +8,7 @@ void multiplicationMatrice3d(double m1[4][4], double m2[4][4], double m3[4][4]);
 // effectue une copie de matrices : m1 = m2
 void copierMatrice3d(double m1[4][4], double m2[4][4]);
 
+void translationMatrice(double m[4][4], t_point3d *vecteur);
+void translationMatriceInverse(double m[4][4], t_point3d *vecteur);
+void rotationMatrice(double m[4][4],t_point3d *centre, float degreX, float degreY, float degreZ);
 #endif

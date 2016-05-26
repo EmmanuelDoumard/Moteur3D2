@@ -266,7 +266,7 @@ t_objet3d* sphere_amiga(double r, double nlat, double nlong)
     p3=definirPoint3d(r*cos((i+1)*2*M_PI/nlong)*sqrt(1-(h1*h1)/(r*r)),-h1,r*sin((i+1)*2*M_PI/nlong)*sqrt(1-(h1*h1)/(r*r)));
     t1 = definirTriangle3d(p1,p2,p3);
 
-    if((i+j)%2==0){
+    if((i+j+1)%2==0){
       __insere_tete(pt_objet,__cree_maillon(t1,BLANC));
     }
     else{
@@ -274,6 +274,59 @@ t_objet3d* sphere_amiga(double r, double nlat, double nlong)
     }
   }
 
+  return pt_objet;
+}
+
+t_objet3d* tore(double r1,double r2, double nlat, double nlong)
+{
+  t_objet3d *pt_objet = NULL;
+
+  pt_objet = objet_vide();
+
+  int i,j;
+
+  t_point3d *p1 = malloc(sizeof(t_point3d));
+  t_point3d *p2 = malloc(sizeof(t_point3d));
+  t_point3d *p3 = malloc(sizeof(t_point3d));
+  t_triangle3d *t1 = malloc(sizeof(t_triangle3d));
+
+  for(i=0;i<nlat;i++){
+    for(j=0;j<nlong;j++){
+
+      // (i,j),(i,j+1),(i+1,j+1)
+      p1=definirPoint3d((r1+r2*cos(i*2*M_PI/nlat))*sin(j*2*M_PI/nlong),
+			r2*sin(i*2*M_PI/nlat),
+			(r1+r2*cos(i*2*M_PI/nlat))*cos(j*2*M_PI/nlong));
+
+      p2=definirPoint3d((r1+r2*cos(i*2*M_PI/nlat))*sin((j+1)*2*M_PI/nlong),
+			r2*sin(i*2*M_PI/nlat),
+			(r1+r2*cos(i*2*M_PI/nlat))*cos((j+1)*2*M_PI/nlong));
+
+      p3=definirPoint3d((r1+r2*cos((i+1)*2*M_PI/nlat))*sin((j+1)*2*M_PI/nlong),
+			r2*sin((i+1)*2*M_PI/nlat),
+			(r1+r2*cos((i+1)*2*M_PI/nlat))*cos((j+1)*2*M_PI/nlong));
+
+      t1 = definirTriangle3d(p1,p2,p3);
+
+      __insere_tete(pt_objet,__cree_maillon(t1,BLANC));
+
+      // (i,j),(i+1,j),(i+1,j+1)
+      p1=definirPoint3d((r1+r2*cos(i*2*M_PI/nlat))*sin(j*2*M_PI/nlong),
+			r2*sin(i*2*M_PI/nlat),
+			(r1+r2*cos(i*2*M_PI/nlat))*cos(j*2*M_PI/nlong));
+
+      p2=definirPoint3d((r1+r2*cos((i+1)*2*M_PI/nlat))*sin(j*2*M_PI/nlong),
+			r2*sin((i+1)*2*M_PI/nlat),
+			(r1+r2*cos((i+1)*2*M_PI/nlat))*cos(j*2*M_PI/nlong));
+
+      p3=definirPoint3d((r1+r2*cos((i+1)*2*M_PI/nlat))*sin((j+1)*2*M_PI/nlong),
+			r2*sin((i+1)*2*M_PI/nlat),
+			(r1+r2*cos((i+1)*2*M_PI/nlat))*cos((j+1)*2*M_PI/nlong));
+      t1 = definirTriangle3d(p1,p2,p3);
+
+      __insere_tete(pt_objet,__cree_maillon(t1,ROUGEF));
+    }
+  } 
   return pt_objet;
 }
 
@@ -289,42 +342,42 @@ t_objet3d* pyramide(double lx, double ly, double lz, Uint32 couleur) //pyramide 
   double z = lz/2;
 
 
-  t_point3d *p1= definirPoint3d(-x,y,-z);
-  t_point3d *p2 = definirPoint3d(x,y,-z);
-  t_point3d *p3 = definirPoint3d(x,y,z);
+  t_point3d *p1= definirPoint3d(-x,-y,-z);
+  t_point3d *p2 = definirPoint3d(x,-y,-z);
+  t_point3d *p3 = definirPoint3d(x,-y,z);
   t_triangle3d *t = definirTriangle3d(p1,p2,p3);
   __insere_tete(pt_objet,__cree_maillon(t,couleur));
   
 
-  p1 = definirPoint3d(-x,y,-z);
-  p2 = definirPoint3d(-x,y,z);
-  p3 = definirPoint3d(x,y,z);
+  p1 = definirPoint3d(-x,-y,-z);
+  p2 = definirPoint3d(-x,-y,z);
+  p3 = definirPoint3d(x,-y,z);
   t = definirTriangle3d(p1,p2,p3);
   __insere_tete(pt_objet,__cree_maillon(t,couleur+20));
 
 
-  p1 = definirPoint3d(-x,y,-z);
-  p2 = definirPoint3d(-x,y,z);
-  p3 = definirPoint3d(0,-y,0);
+  p1 = definirPoint3d(-x,-y,-z);
+  p2 = definirPoint3d(-x,-y,z);
+  p3 = definirPoint3d(0,y,0);
   t = definirTriangle3d(p1,p2,p3);
   __insere_tete(pt_objet,__cree_maillon(t,couleur+40));
  
-  p1 = definirPoint3d(-x,y,-z);
-  p2 = definirPoint3d(x,y,-z);
-  p3 = definirPoint3d(0,-y,0);
+  p1 = definirPoint3d(-x,-y,-z);
+  p2 = definirPoint3d(x,-y,-z);
+  p3 = definirPoint3d(0,y,0);
   t = definirTriangle3d(p1,p2,p3);
   __insere_tete(pt_objet,__cree_maillon(t,couleur+60));
   
-  p1 = definirPoint3d(-x,y,z);
-  p2 = definirPoint3d(x,y,z);
-  p3 = definirPoint3d(0,-y,0);
+  p1 = definirPoint3d(-x,-y,z);
+  p2 = definirPoint3d(x,-y,z);
+  p3 = definirPoint3d(0,y,0);
   t = definirTriangle3d(p1,p2,p3);
   __insere_tete(pt_objet,__cree_maillon(t,couleur+80));
  
    
-  p1 = definirPoint3d(x,y,-z);
-  p2 = definirPoint3d(x,y,z);
-  p3 = definirPoint3d(0,-y,0);
+  p1 = definirPoint3d(x,-y,-z);
+  p2 = definirPoint3d(x,-y,z);
+  p3 = definirPoint3d(0,y,0);
   t = definirTriangle3d(p1,p2,p3);
   __insere_tete(pt_objet,__cree_maillon(t,couleur+100));
  
@@ -339,7 +392,7 @@ t_objet3d* arbre(double lx, double ly, double lz)
   t_objet3d *tronc=parallelepipede(lx,ly/2,lz,MARRON1);
   translationObjet3d(tronc,definirPoint3d(0,ly/4,0));
   
-  t_objet3d *feuillage=pyramide(lx,ly/2,lz,VERTC);
+  t_objet3d *feuillage=pyramide(2*lx,ly/2,2*lz,VERTC);
   rotationObjet3d(feuillage,definirPoint3d(0,0,0),180,0,0);
   translationObjet3d(feuillage,definirPoint3d(0,-ly/4,0));
 
@@ -429,7 +482,6 @@ void __trier_objet(t_objet3d *pt_objet)
     nb_faces++;
   }
 
-  printf("nb_faces=%d\n",nb_faces);
 
   for (i=0;i<nb_faces;i++){
     suiv=pt_objet->tete;
@@ -450,12 +502,45 @@ void __trier_objet(t_objet3d *pt_objet)
     }
   }
   suiv=pt_objet->tete;
-  /*  for(i=0;i<nb_faces;i++){
-    printf("%f,%d\n",avgz(suiv->face),suiv->couleur);
-    suiv=suiv->pt_suiv; 
-    } */
 }
 
+//version bugée à corriger
+/*void __trier_objet(t_objet3d *pt_objet)
+{
+  t_maillon *suiv = pt_objet->tete;
+  t_triangle3d *tmp_t=malloc(sizeof(t_triangle3d));
+  Uint32 tmp_c;
+  int nb_faces=0;
+  int i,j;
+  t_bool chgt;
+  while (suiv != NULL) {
+    suiv = suiv->pt_suiv;
+    nb_faces++;
+  }
+
+  printf("nb_faces=%d\n",nb_faces);
+
+  while (i<nb_faces && chgt){
+    suiv=pt_objet->tete;
+    chgt=false;
+    for (j=0;j<nb_faces-i-1;j++){
+      //printf("avgz(suiv->face)=%f ; avgz(suiv->pt_suiv->face)=%f\n",avgz(suiv->face),avgz(suiv->pt_suiv->face));
+      if (avgz(suiv->face)<avgz(suiv->pt_suiv->face)){
+	//printf("Reagencement...\n");
+	tmp_t=suiv->face;
+	tmp_c=suiv->couleur;
+	suiv->face=suiv->pt_suiv->face;
+	suiv->couleur=suiv->pt_suiv->couleur;
+	suiv->pt_suiv->face=tmp_t;
+	suiv->pt_suiv->couleur=tmp_c;
+	chgt=true;
+      }
+
+      suiv=suiv->pt_suiv;
+    }
+  }
+  suiv=pt_objet->tete;
+} */
 double avgz(t_triangle3d *face){
   return (face->abc[0]->xyzt[2]+face->abc[1]->xyzt[2]+face->abc[2]->xyzt[2])/3;
 }
