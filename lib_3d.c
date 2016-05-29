@@ -59,17 +59,20 @@ t_triangle3d *definirTriangle3d(t_point3d * a, t_point3d * b, t_point3d * c)	// 
 
 t_triangle3d *copierTriangle3d(t_triangle3d *t)
 {
-  t_triangle3d *n = NULL;
-  // n = malloc
-  // TODO
-
+  t_triangle3d *n = malloc(sizeof(t_triangle3d));
+  n->abc[0]=definirPoint3d(t->abc[0]->xyzt[0],t->abc[0]->xyzt[1],t->abc[0]->xyzt[2]);
+  n->abc[1]=definirPoint3d(t->abc[1]->xyzt[0],t->abc[1]->xyzt[1],t->abc[1]->xyzt[2]);
+  n->abc[2]=definirPoint3d(t->abc[2]->xyzt[0],t->abc[2]->xyzt[1],t->abc[2]->xyzt[2]);
   return n;
 
 }
 
 void libererTriangle3d(t_triangle3d *t)
 {
-  // TODO
+  free(t->abc[0]);
+  free(t->abc[1]);
+  free(t->abc[2]);
+  free(t);
 }
 
 // effectue une conversion de 2D en 3D

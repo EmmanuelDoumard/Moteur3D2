@@ -29,33 +29,70 @@ int main(int argc,char** argv)
   t_point3d *v10 = definirVecteur3d(1,1,1);
 #endif
 #ifdef O3D
+
   t_point3d *origine = definirPoint3d(0,0,0), *vecteur;
     
   t_objet3d *camorigine=camera();
 
-  t_objet3d *dam = damier(200, 200 , 5,5);
-  t_point3d *v1=definirPoint3d(200,200,0);
-  //translationObjet3d(dam,v1);
-  t_objet3d *testsphere = sphere(50,12,12);
-  t_objet3d *dam2= damier(100, 100, 10,10);
-  //translationObjet3d(dam2,definirPoint3d(-200,-200,0));
-  //rotationObjet3d(dam2,definirPoint3d(-200,-200,0),90,0,0);
+  t_objet3d *soleil=sphere(80,12,12,ROUGEC,ROUGEF);
 
-  t_objet3d *sphamiga= sphere_amiga(50,12,12);
-  //translationObjet3d(sphamiga,definirPoint3d(-200,0,0));
+  t_objet3d *saturne=sphere(30,10,10,MARRON1,MARRON2);
+  t_point3d *centreSaturne=definirPoint3d(0,0,0);
+  //translationObjet3d(saturne,centreSaturne);
 
-  t_objet3d *test_tore = tore(100,10,10,20);
-  //translationObjet3d(test_tore,definirPoint3d(-200,200,0));
+  t_objet3d *uranus=sphere(30,10,10,BLEUC,BLEUC);
+  t_point3d *centreUranus=definirPoint3d(0,0,0);
+  //translationObjet3d(uranus,centreUranus);
 
-  t_objet3d *a=arbre(30,200,30);
-  //translationObjet3d(a,definirPoint3d(200,0,0));
+  t_objet3d *terre=sphere(15,8,8,BLEUC,BLEUF);
+  t_point3d *centreTerre=definirPoint3d(0,0,0);
+  //translationObjet3d(terre,centreTerre);
+
+  t_objet3d *lune=sphere(6,6,6,GRISC,GRISF);
+  t_point3d *centreLune=definirPoint3d(0,0,0);
+  //translationObjet3d(lune,centreLune);
+
+  t_objet3d *anneauS=tore(40,3,3,16);
+
+  //translationObjet3d(anneauS,centreSaturne);
+
+  t_objet3d *anneauU=tore(40,2,3,16);
+
+  //translationObjet3d(anneauU,centreUranus);
+
 
   t_scene3d *scene = definirScene3d(camorigine);
-  t_scene3d *scdam = ajouter_relation(scene,dam);
-  t_scene3d *scsphere = ajouter_relation(scene->pt_fils, testsphere);
-  t_scene3d *sctore = ajouter_relation(scene->pt_fils, test_tore);
+
+  t_point3d* centreSoleil=origine;
+
+  t_scene3d *scsol = ajouter_relation(scene,soleil);
+  t_scene3d *scsat = ajouter_relation(scsol,saturne);
+  t_scene3d *scanneau1 = ajouter_relation(scsat, anneauS);
+  t_scene3d *scura = ajouter_relation(scsol,uranus);
+  t_scene3d *scanneauU=ajouter_relation(scura,anneauU);
+  t_scene3d *scterre=ajouter_relation(scsol,terre);
+  t_scene3d *sclune=ajouter_relation(scterre,lune);
 
 
+  vecteur=definirPoint3d(150,0,0);
+  translationScene3d(scterre,vecteur);
+  free(vecteur);
+
+  vecteur=definirPoint3d(250,0,0);
+  translationScene3d(scsat,vecteur);
+  free(vecteur);
+
+  vecteur=definirPoint3d(320,0,0);
+  translationScene3d(scura,vecteur);
+  free(vecteur);
+
+  vecteur=definirPoint3d(40,0,0);
+  translationScene3d(sclune,vecteur);
+  free(vecteur);
+
+
+  rotationScene3d(scanneauU,centreUranus,0,0,90);
+  
 
 
 
@@ -63,12 +100,12 @@ int main(int argc,char** argv)
 
   t_bool quit=false;
   SDL_Event event; //variable event
-  int dx=0;
-  int dy=0;
-  int dz=0;
-  int drx=0;
-  int dry=0;
-  int drz=0;
+  float dx=0;
+  float dy=0;
+  float dz=0;
+  float drx=0;
+  float dry=0;
+  float drz=0;
 
 #endif
 
@@ -115,44 +152,12 @@ int main(int argc,char** argv)
        * - finir par le tri des faces d'un objet et la composition des objets
        */
 
-      vecteur = definirPoint3d(sin(i*M_PI/180),cos(i*M_PI/180),0);
-
-      /*
-	if(i<250){
-	dessinerObjet3d(surface,dam2);
-	}
-	if(i==250){
-	composerObjet3d(dam,dam2);
-	}
-
-        //translationObjet3d(testsphere, vecteur);
-	
-
-
-	rotationObjet3d(dam,origine,1,1,0);		   
-	rotationObjet3d(testsphere,origine,1,1,1);
-	rotationObjet3d(sphamiga,definirPoint3d(-200,0,0),1,1,1);
-	rotationObjet3d(test_tore,definirPoint3d(-200,200,0),0.5,0.5,0.5);
-	rotationObjet3d(a,definirPoint3d(200,0,0),1,1,1);
-	//__trier_objet(o10);                    //déjà utilisé au début de dessinerObjet3d
-	
-	dessinerObjet3d(surface, dam);
-        dessinerObjet3d(surface, testsphere);
-	dessinerObjet3d(surface, sphamiga);
-	dessinerObjet3d(surface, test_tore);
-	dessinerObjet3d(surface, a);
-
-        free(vecteur);
-	SDL_Delay(25);
-      */
-      //rotationScene3d(scdam,origine,1,1,1);
-      //rotationScene3d(sctore,origine,1,1,1);
-      //rotationScene3d(scsphere,origine,-1,-1,-1);
-
 
       // Outil SDL Benoit !
 
-      
+      //rotationObjet3d(soleil,origine,0,1,0);
+      //dessinerObjet3d(surface,soleil);
+      //printf("coucou\n");
       dessinerScene3d(surface,scene);
 
       SDL_PollEvent(&event); //récupère la dernière entré système(souris, clavier etc...
@@ -239,7 +244,30 @@ int main(int argc,char** argv)
 	{
 	  rotationScene3d(scene,origine,0,0,1);
 	  }
+      
+      multiplicationVecteur3d(centreSaturne,origine,scsat->descendant);
+      multiplicationVecteur3d(centreUranus,origine,scura->descendant);
+      multiplicationVecteur3d(centreTerre,origine,scterre->descendant);
+      multiplicationVecteur3d(centreLune,origine,sclune->descendant);
+      
+      
+      rotationScene3d(scsol,origine,0,0.2,0);
+      rotationScene3d(scsat,origine,0,0.5,0);
+      rotationScene3d(scterre,origine,0,1,0);
+      rotationScene3d(sclune,centreLune,0,-3,0);
+      rotationScene3d(scanneauU,origine,5,0,0);
+      rotationScene3d(scura,origine,0,0.3,0);
+      
+      /*
+      rotationScene3d(sclune,origine,0,-3,0);      
+      rotationScene3d(scterre,centreTerre,0,1,0);
+      rotationScene3d(scsat,centreSaturne,0,0.5,0);
+      rotationScene3d(scura,centreUranus,0,0.3,0);
+      */
+      
+      
 
+      
       SDL_Delay(25);
 #endif
 

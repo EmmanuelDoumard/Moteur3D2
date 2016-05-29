@@ -64,30 +64,36 @@ void rotationScene3d(t_scene3d *pt_scene, t_point3d *centre, float degreX, float
 
 void dessinerScene3d(t_surface *surface, t_scene3d* pt_racine)
 {
-  dessinerScene3drec(surface,pt_racine,MATRICE_IDENTITE,MATRICE_IDENTITE);
-  printf("bula\n");
+  t_objet3d* scene=objet_vide();
+  dessinerScene3drec(surface,pt_racine,MATRICE_IDENTITE,MATRICE_IDENTITE,scene);
+  dessinerObjet3d(surface,scene);
+  libererObjet3d(scene);
+  //printf("bula\n");
 }
 
-void dessinerScene3drec(t_surface *surface, t_scene3d* pt_racine,double mat[4][4],double matinv[4][4])
+void dessinerScene3drec(t_surface *surface, t_scene3d* pt_racine,double mat[4][4],double matinv[4][4], t_objet3d *objtmp)
 {
   if (pt_racine!=NULL){
     double mattmp[4][4];
     double mattmpinv[4][4];
 
+    t_objet3d* tmp;
+
     multiplicationMatrice3d(mattmp,mat,pt_racine->descendant);
     multiplicationMatrice3d(mattmpinv,pt_racine->montant,matinv);
 
-    printf("matrice descendante :\n");
+    /*printf("matrice descendante :\n");
     affichermatrice(pt_racine->descendant);
     printf("matrice montante : \n");
-    affichermatrice(pt_racine->montant);
+    affichermatrice(pt_racine->montant);*/
 
     transformationObjet3d(pt_racine->objet,mattmp);
-    dessinerObjet3d(surface,pt_racine->objet);
+    tmp=copierObjet3d(pt_racine->objet);
+    composerObjet3d(objtmp,tmp);
     transformationObjet3d(pt_racine->objet,mattmpinv);
   
-    dessinerScene3drec(surface,pt_racine->pt_suiv,mat,matinv);
-    dessinerScene3drec(surface,pt_racine->pt_fils,mattmp,mattmpinv);
+    dessinerScene3drec(surface,pt_racine->pt_suiv,mat,matinv,objtmp);
+    dessinerScene3drec(surface,pt_racine->pt_fils,mattmp,mattmpinv,objtmp);
   }
 }
 

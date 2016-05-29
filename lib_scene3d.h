@@ -23,6 +23,6 @@ void translationScene3d(t_scene3d *pt_scene, t_point3d *vecteur);
 void rotationScene3d(t_scene3d *pt_scene, t_point3d *centre, float degreX, float degreY, float degreZ);
 void dessinerScene3d(t_surface *surface, t_scene3d* pt_scene);
 //void changerCamera(t_scene3d *pt_objet); // modifie l'arbre de la scene pour que pt_objet en soit la racine, pt_racine ne veut plus rien dire
-void dessinerScene3drec(t_surface *surface,t_scene3d* pt_racine,double mat[4][4],double matinv[4][4]);
+void dessinerScene3drec(t_surface *surface,t_scene3d* pt_racine,double mat[4][4],double matinv[4][4],t_objet3d *objtmp);
 
 #endif /* LIB_SCENE3D_H_ */

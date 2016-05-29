@@ -128,7 +128,7 @@ void rotationMatrice(double m[4][4],t_point3d *centre, float degreX, float degre
 
   multiplicationMatrice3d(tmp,matrice_translation_inverse,matrice_rotationz);
   multiplicationMatrice3d(tmp,matrice_rotationy,tmp);
-  multiplicationMatrice3d(tmp,matrice_rotationz,tmp);
-  multiplicationMatrice3d(tmp,matrice_translation_inverse,tmp);
+  multiplicationMatrice3d(tmp,matrice_rotationx,tmp);
+  multiplicationMatrice3d(tmp,matrice_translation,tmp);
   copierMatrice3d(m,tmp);
 }
